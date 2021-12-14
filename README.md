@@ -1,2 +1,2 @@
 # BI-DW-with-Pentaho
-Modelagem e construção de um Data Hub para a empresa Suco de Frutas
+Business Intelligence environment for the Suco de Frutas company.
