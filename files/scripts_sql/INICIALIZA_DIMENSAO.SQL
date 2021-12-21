@@ -1,0 +1,1 @@
+UPDATE DIM_ORGANIZACIONAL SET Esquerda = 0, Direita = 0, Nivel = 0;
