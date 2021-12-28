@@ -1,0 +1,5 @@
+fontes/type=javax.sql.DataSource
+fontes/driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+fontes/url=jdbc:sqlserver://localhost:1433;databaseName=fontes_db
+fontes/user=sa
+fontes/password=8ii
