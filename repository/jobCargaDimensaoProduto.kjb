@@ -435,52 +435,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>304</xloc>
-      <yloc>96</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>Mail</name>
-      <description/>
-      <type>MAIL</type>
-      <attributes/>
-      <server>smtp.gmail.com</server>
-      <port>465</port>
-      <destination>brugnaroto@gmail.com</destination>
-      <destinationCc/>
-      <destinationBCc/>
-      <replyto>brugnaroto@gmail.com</replyto>
-      <replytoname>Pentaho</replytoname>
-      <subject>Erro Processo de Carga</subject>
-      <include_date>Y</include_date>
-      <contact_person/>
-      <contact_phone/>
-      <comment>Ocorreu um erro no processo de carga das dimensões.</comment>
-      <include_files>Y</include_files>
-      <zip_files>N</zip_files>
-      <zip_name/>
-      <use_auth>Y</use_auth>
-      <use_secure_auth>Y</use_secure_auth>
-      <auth_user>brugnaroto@gmail.com</auth_user>
-      <auth_password>Encrypted 2be98afc827c68681be0afb2387c2fa83</auth_password>
-      <only_comment>N</only_comment>
-      <use_HTML>N</use_HTML>
-      <use_Priority>N</use_Priority>
-      <encoding>UTF-8</encoding>
-      <priority>normal</priority>
-      <importance>normal</importance>
-      <sensitivity>normal</sensitivity>
-      <secureconnectiontype>SSL</secureconnectiontype>
-      <replyToAddresses/>
-      <filetypes>
-        <filetype>LOG</filetype>
-      </filetypes>
-      <embeddedimages>
-      </embeddedimages>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>224</yloc>
+      <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -535,7 +490,7 @@
     </hop>
     <hop>
       <from>Categoria Transformation</from>
-      <to>Mail</to>
+      <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -544,7 +499,7 @@
     </hop>
     <hop>
       <from>Marca Transformation</from>
-      <to>Mail</to>
+      <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -553,20 +508,11 @@
     </hop>
     <hop>
       <from>Produto Transformation</from>
-      <to>Mail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Mail</from>
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
