@@ -339,26 +339,6 @@
       <suppress_result_data>N</suppress_result_data>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>ANO_FINAL</name>
-          <stream_name/>
-          <value>2013</value>
-        </parameter>
-        <parameter>
-          <name>ANO_INCIAL</name>
-          <stream_name/>
-          <value>2013</value>
-        </parameter>
-        <parameter>
-          <name>MES_FINAL</name>
-          <stream_name/>
-          <value>5</value>
-        </parameter>
-        <parameter>
-          <name>MES_INICIAL</name>
-          <stream_name/>
-          <value>5</value>
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -472,8 +452,8 @@
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
