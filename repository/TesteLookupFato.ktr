@@ -435,6 +435,69 @@
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>Teste Lookup</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>TesteLookup</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.defaultFetchSize</code>
+        <attribute>500</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useCursorFetch</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <order>
     <hop>
       <from>Reader Fato Table</from>
@@ -449,6 +512,36 @@
     <hop>
       <from>Date Conversion</from>
       <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Find ID (Incremento)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Find ID</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Find ID (lookup)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Find ID (Incremento)</from>
+      <to>Insert / update Fato Incremento</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Find ID</from>
+      <to>Insert / update Fato</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Find ID (lookup)</from>
+      <to>Insert / update Fato Data</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -558,8 +651,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>160</yloc>
+      <xloc>112</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -602,8 +695,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>256</yloc>
+      <xloc>288</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -659,7 +752,7 @@
     </remotesteps>
     <GUI>
       <xloc>288</xloc>
-      <yloc>160</yloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -667,7 +760,7 @@
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -692,8 +785,338 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>240</yloc>
+      <xloc>432</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Find ID (Incremento)</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Teste Lookup</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>dim_pessoa_incremento</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>CODIGO</name>
+        <field>Cod_Pessoa</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>Id_Pessoa</name>
+        <rename>Id_Pessoa</rename>
+        <default>0</default>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Find ID</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Teste Lookup</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>dim_pessoa</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>CODIGO</name>
+        <field>Cod_Pessoa</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>Id_Pessoa</name>
+        <rename>Id_Pessoa</rename>
+        <default>0</default>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Find ID (lookup)</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema/>
+    <table>dim_pessoa_data</table>
+    <connection>Teste Lookup</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>CODIGO</name>
+        <lookup>Cod_Pessoa</lookup>
+      </key>
+      <date>
+        <name>DATE_FINAL</name>
+        <from>Data_Inicial</from>
+        <to>Data_Final</to>
+      </date>
+      <return>
+        <name>Id_Pessoa</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>Versao</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update Fato Incremento</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Teste Lookup</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>fato_incremento</table>
+      <key>
+        <name>Id_Pessoa</name>
+        <field>Id_Pessoa</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>DATE_FINAL</name>
+        <field>Data</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>Valor</name>
+        <rename>VALOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Data</name>
+        <rename>DATE_FINAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>Id_Pessoa</name>
+        <rename>Id_Pessoa</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update Fato</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Teste Lookup</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>fato</table>
+      <key>
+        <name>Id_Pessoa</name>
+        <field>Id_Pessoa</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>DATE_FINAL</name>
+        <field>Data</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>Valor</name>
+        <rename>VALOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Data</name>
+        <rename>DATE_FINAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>Id_Pessoa</name>
+        <rename>Id_Pessoa</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update Fato Data</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Teste Lookup</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>fato_data</table>
+      <key>
+        <name>Id_Pessoa</name>
+        <field>Id_Pessoa</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>DATE_FINAL</name>
+        <field>Data</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>Valor</name>
+        <rename>VALOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Data</name>
+        <rename>DATE_FINAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>Id_Pessoa</name>
+        <rename>Id_Pessoa</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
