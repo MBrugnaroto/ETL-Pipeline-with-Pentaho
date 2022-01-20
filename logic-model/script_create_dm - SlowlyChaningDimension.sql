@@ -1,3 +1,4 @@
+USE DMPRESIDENCIA;
 
 CREATE TABLE Dim_Organizacional (
                 id_vendedor INT NOT NULL,
