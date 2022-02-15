@@ -96,6 +96,6 @@ INNER JOIN (
 ON X.Cod_Produto = K.Cod_Produto
 	  AND X.Cod_Fabrica = K.Cod_Fabrica AND X.Cod_Tempo = K.Cod_Tempo
 	  WHERE CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) >= 2013 
-	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) >= 1
+	  AND CAST(SUBSTRING(X.Cod_tempo,5,2) AS UNSIGNED) >= 1
 	  AND CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) <= 2013 
-	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) <= 1;
+	  AND CAST(SUBSTRING(X.Cod_tempo,5,2) AS UNSIGNED) <= 1;

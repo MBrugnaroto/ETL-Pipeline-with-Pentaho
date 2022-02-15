@@ -6,8 +6,29 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
+      <parameter>
+        <name>ANO_FINAL</name>
+        <default_value/>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>ANO_INICIAL</name>
+        <default_value/>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>MES_FINAL</name>
+        <default_value/>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>MES_INICIAL</name>
+        <default_value/>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -767,14 +788,14 @@ INNER JOIN (
 	  AND A.Cod_Fabrica = B.Cod_Fabrica AND A.Cod_Tempo = B.Cod_Tempo ) K
 ON X.Cod_Produto = K.Cod_Produto
 	  AND X.Cod_Fabrica = K.Cod_Fabrica AND X.Cod_Tempo = K.Cod_Tempo
-	  WHERE CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) >= 2013 
-	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) >= 1
-	  AND CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) &lt;= 2013 
-	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) &lt;= 1</sql>
+	  WHERE CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) >= ${ANO_INICIAL} 
+	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) >= ${MES_INICIAL}
+	  AND CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) &lt;= ${ANO_FINAL} 
+	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) &lt;= ${MES_FINAL}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
