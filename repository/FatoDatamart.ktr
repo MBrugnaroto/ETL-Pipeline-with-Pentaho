@@ -430,7 +430,7 @@
     <created_date>2022/02/14 22:45:42.380</created_date>
     <modified_user>-</modified_user>
     <modified_date>2022/02/14 22:45:42.380</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -582,7 +582,83 @@
       <to>Find Produto ID</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Find Produto ID</from>
+      <to>Find Organizacional ID</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Find Organizacional ID</from>
+      <to>Find Cliente ID</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Find Cliente ID</from>
+      <to>Remove Columns</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Remove Columns</from>
+      <to>Insert / update Fato</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Date Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>DATA_DATE</field_name>
+      <calc_type>COPY_FIELD</calc_type>
+      <field_a>Cod_Tempo</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Date</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask>yyyyMMdd</conversion_mask>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>DATE_FINAL</field_name>
+      <calc_type>COPY_FIELD</calc_type>
+      <field_a>DATA_DATE</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Date</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask>dd/MM/yyyy</conversion_mask>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Factor Reader</name>
     <type>TableInput</type>
@@ -1040,62 +1116,6 @@ ON X.Cod_Produto = K.Cod_Produto
     </GUI>
   </step>
   <step>
-    <name>Date Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>DATA_DATE</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>Cod_Tempo</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Date</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask>yyyyMMdd</conversion_mask>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>DATE_FINAL</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>DATA_DATE</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Date</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask>dd/MM/yyyy</conversion_mask>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Find Fabrica ID</name>
     <type>DBLookup</type>
     <description/>
@@ -1144,8 +1164,8 @@ ON X.Cod_Produto = K.Cod_Produto
     </GUI>
   </step>
   <step>
-    <name>Find Tempo ID</name>
-    <type>DBLookup</type>
+    <name>Find Organizacional ID</name>
+    <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1154,29 +1174,38 @@ ON X.Cod_Produto = K.Cod_Produto
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <schema/>
+    <table>dim_organizacional</table>
     <connection>Datamart Presidencia</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>dim_tempo</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
       <key>
-        <name>Cod_Tempo</name>
-        <field>cod_tempo</field>
-        <condition>=</condition>
-        <name2/>
+        <name>Cod_Organizacional</name>
+        <lookup>cod_vendedor</lookup>
       </key>
-      <value>
-        <name>id_tempo</name>
-        <rename>id_tempo</rename>
-        <default>0</default>
-        <type>None</type>
-      </value>
-    </lookup>
+      <date>
+        <name>DATE_FINAL</name>
+        <from>data_inicial</from>
+        <to>data_final</to>
+      </date>
+      <return>
+        <name>id_vendedor</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>versao</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1186,8 +1215,8 @@ ON X.Cod_Produto = K.Cod_Produto
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>48</yloc>
+      <xloc>704</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1234,7 +1263,293 @@ ON X.Cod_Produto = K.Cod_Produto
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
+      <xloc>528</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Find Tempo ID</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Datamart Presidencia</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>dim_tempo</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>Cod_Tempo</name>
+        <field>cod_tempo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_tempo</name>
+        <rename>id_tempo</rename>
+        <default>0</default>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Find Cliente ID</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema/>
+    <table>dim_cliente</table>
+    <connection>Datamart Presidencia</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>Cod_Cliente</name>
+        <lookup>cod_cliente</lookup>
+      </key>
+      <date>
+        <name>DATE_FINAL</name>
+        <from>data_inicial</from>
+        <to>data_final</to>
+      </date>
+      <return>
+        <name>id_cliente</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>versao</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove Columns</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>Cod_Cliente</name>
+      </remove>
+      <remove>
+        <name>Cod_Produto</name>
+      </remove>
+      <remove>
+        <name>Cod_Organizacional</name>
+      </remove>
+      <remove>
+        <name>Cod_Fabrica</name>
+      </remove>
+      <remove>
+        <name>Cod_Tempo</name>
+      </remove>
+      <remove>
+        <name>DATA_DATE</name>
+      </remove>
+      <remove>
+        <name>DATE_FINAL</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update Fato</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Datamart Presidencia</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>fato_presidencia</table>
+      <key>
+        <name>id_cliente</name>
+        <field>id_cliente</field>
+        <condition/>
+        <name2/>
+      </key>
+      <key>
+        <name>id_fabrica</name>
+        <field>id_fabrica</field>
+        <condition/>
+        <name2/>
+      </key>
+      <key>
+        <name>id_produto</name>
+        <field>id_produto</field>
+        <condition/>
+        <name2/>
+      </key>
+      <key>
+        <name>id_tempo</name>
+        <field>id_tempo</field>
+        <condition/>
+        <name2/>
+      </key>
+      <key>
+        <name>id_vendedor</name>
+        <field>id_vendedor</field>
+        <condition/>
+        <name2/>
+      </key>
+      <value>
+        <name>faturamento</name>
+        <rename>Faturamento</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>imposto</name>
+        <rename>Imposto</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>custo_variavel</name>
+        <rename>Custo_Variavel</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>unidade_vendida</name>
+        <rename>Unidade_Vendida</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quantidade_vendida</name>
+        <rename>Quantidade_Vendida</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>custo_frete</name>
+        <rename>Frete_Rateio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>custo_fixo</name>
+        <rename>Custo_Fixo_Rateio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>meta_faturamento</name>
+        <rename>Meta_Faturamento_Rateio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>meta_custo</name>
+        <rename>Meta_Custo_Rateio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_fabrica</name>
+        <rename>id_fabrica</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>id_tempo</name>
+        <rename>id_tempo</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>id_produto</name>
+        <rename>id_produto</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>id_vendedor</name>
+        <rename>id_vendedor</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>id_cliente</name>
+        <rename>id_cliente</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
