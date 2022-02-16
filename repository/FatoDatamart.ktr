@@ -789,9 +789,9 @@ INNER JOIN (
 ON X.Cod_Produto = K.Cod_Produto
 	  AND X.Cod_Fabrica = K.Cod_Fabrica AND X.Cod_Tempo = K.Cod_Tempo
 	  WHERE CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) >= ${ANO_INICIAL} 
-	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) >= ${MES_INICIAL}
+	  AND CAST(SUBSTRING(X.Cod_tempo,5,2) AS UNSIGNED) >= ${MES_INICIAL}
 	  AND CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) &lt;= ${ANO_FINAL} 
-	  AND CAST(SUBSTRING(X.Cod_tempo,7,8) AS UNSIGNED) &lt;= ${MES_FINAL}</sql>
+	  AND CAST(SUBSTRING(X.Cod_tempo,5,2) AS UNSIGNED) &lt;= ${MES_FINAL}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1137,6 +1137,63 @@ ON X.Cod_Produto = K.Cod_Produto
     </GUI>
   </step>
   <step>
+    <name>Find Cliente ID</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema/>
+    <table>dim_cliente</table>
+    <connection>Datamart Presidencia</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>Cod_Cliente</name>
+        <lookup>cod_cliente</lookup>
+      </key>
+      <date>
+        <name>DATE_FINAL</name>
+        <from>data_inicial</from>
+        <to>data_final</to>
+      </date>
+      <return>
+        <name>id_cliente</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>versao</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Find Fabrica ID</name>
     <type>DBLookup</type>
     <description/>
@@ -1338,112 +1395,6 @@ ON X.Cod_Produto = K.Cod_Produto
     </GUI>
   </step>
   <step>
-    <name>Find Cliente ID</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema/>
-    <table>dim_cliente</table>
-    <connection>Datamart Presidencia</connection>
-    <commit>100</commit>
-    <update>N</update>
-    <fields>
-      <key>
-        <name>Cod_Cliente</name>
-        <lookup>cod_cliente</lookup>
-      </key>
-      <date>
-        <name>DATE_FINAL</name>
-        <from>data_inicial</from>
-        <to>data_final</to>
-      </date>
-      <return>
-        <name>id_cliente</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>versao</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Remove Columns</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>Cod_Cliente</name>
-      </remove>
-      <remove>
-        <name>Cod_Produto</name>
-      </remove>
-      <remove>
-        <name>Cod_Organizacional</name>
-      </remove>
-      <remove>
-        <name>Cod_Fabrica</name>
-      </remove>
-      <remove>
-        <name>Cod_Tempo</name>
-      </remove>
-      <remove>
-        <name>DATA_DATE</name>
-      </remove>
-      <remove>
-        <name>DATE_FINAL</name>
-      </remove>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>880</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Insert / update Fato</name>
     <type>InsertUpdate</type>
     <description/>
@@ -1463,31 +1414,31 @@ ON X.Cod_Produto = K.Cod_Produto
       <key>
         <name>id_cliente</name>
         <field>id_cliente</field>
-        <condition/>
+        <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>id_fabrica</name>
         <field>id_fabrica</field>
-        <condition/>
+        <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>id_produto</name>
         <field>id_produto</field>
-        <condition/>
+        <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>id_tempo</name>
         <field>id_tempo</field>
-        <condition/>
+        <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>id_vendedor</name>
         <field>id_vendedor</field>
-        <condition/>
+        <condition>=</condition>
         <name2/>
       </key>
       <value>
@@ -1572,6 +1523,55 @@ ON X.Cod_Produto = K.Cod_Produto
     <GUI>
       <xloc>880</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove Columns</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>Cod_Cliente</name>
+      </remove>
+      <remove>
+        <name>Cod_Produto</name>
+      </remove>
+      <remove>
+        <name>Cod_Organizacional</name>
+      </remove>
+      <remove>
+        <name>Cod_Fabrica</name>
+      </remove>
+      <remove>
+        <name>Cod_Tempo</name>
+      </remove>
+      <remove>
+        <name>DATA_DATE</name>
+      </remove>
+      <remove>
+        <name>DATE_FINAL</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
