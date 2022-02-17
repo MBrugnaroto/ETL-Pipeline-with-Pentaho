@@ -1,0 +1,4 @@
+<Schema name="SucoFrutas" description="Esquema dos Data Marts da Empresa Suco de Frutas">
+  <Cube name="dmpresidencia" visible="true" description="Data Mart da Presidencia" cache="true" enabled="true">
+  </Cube>
+</Schema>
