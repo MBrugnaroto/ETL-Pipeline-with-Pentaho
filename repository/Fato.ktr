@@ -9,26 +9,6 @@
     <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>ANO_FINAL</name>
-        <default_value/>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>ANO_INCIAL</name>
-        <default_value/>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>MES_FINAL</name>
-        <default_value/>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>MES_INICIAL</name>
-        <default_value/>
-        <description/>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -624,8 +604,20 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>dwsucos</schema>
+      <schema/>
       <table>fato_001</table>
+      <key>
+        <name>COD_PRODUTO</name>
+        <field>cod_produto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>COD_ORGANIZACIONAL</name>
+        <field>cod_organizacional</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <key>
         <name>COD_FABRICA</name>
         <field>cod_fabrica</field>
@@ -641,18 +633,6 @@
       <key>
         <name>COD_CLIENTE</name>
         <field>cod_cliente</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>COD_ORGANIZACIONAL</name>
-        <field>cod_organizacional</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>COD_PRODUTO</name>
-        <field>cod_produto</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -1027,7 +1007,7 @@
     <sql>SELECT * FROM TAB_FATO001
 WHERE 
 	YEAR(DATA_FATO) >= ${ANO_INCIAL} AND MONTH(DATA_FATO) >= ${MES_INICIAL} AND
-	YEAR(DATA_FATO) &lt;= ${ANO_INCIAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
+	YEAR(DATA_FATO) &lt;= ${ANO_FINAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1319,7 +1299,7 @@ WHERE
     <sql>SELECT * FROM TAB_FATO002
 WHERE 
 	YEAR(DATA_FATO) >= ${ANO_INCIAL} AND MONTH(DATA_FATO) >= ${MES_INICIAL} AND
-	YEAR(DATA_FATO) &lt;= ${ANO_INCIAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
+	YEAR(DATA_FATO) &lt;= ${ANO_FINAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1496,7 +1476,7 @@ WHERE
     <sql>SELECT * FROM TAB_FATO003
 WHERE 
 	YEAR(DATA_FATO) >= ${ANO_INCIAL} AND MONTH(DATA_FATO) >= ${MES_INICIAL} AND
-	YEAR(DATA_FATO) &lt;= ${ANO_INCIAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
+	YEAR(DATA_FATO) &lt;= ${ANO_FINAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1627,8 +1607,7 @@ WHERE
     <sql>SELECT * FROM TAB_FATO004
 WHERE 
 	YEAR(DATA_FATO) >= ${ANO_INCIAL} AND MONTH(DATA_FATO) >= ${MES_INICIAL} AND
-	YEAR(DATA_FATO) &lt;= ${ANO_INCIAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
-</sql>
+	YEAR(DATA_FATO) &lt;= ${ANO_FINAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1804,7 +1783,7 @@ WHERE
     <sql>SELECT * FROM TAB_FATO005
 WHERE 
 	YEAR(DATA_FATO) >= ${ANO_INCIAL} AND MONTH(DATA_FATO) >= ${MES_INICIAL} AND
-	YEAR(DATA_FATO) &lt;= ${ANO_INCIAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
+	YEAR(DATA_FATO) &lt;= ${ANO_FINAL} AND MONTH(DATA_FATO) &lt;= ${MES_FINAL}
 </sql>
     <limit>0</limit>
     <lookup/>

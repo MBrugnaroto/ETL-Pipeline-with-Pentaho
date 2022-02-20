@@ -382,7 +382,7 @@
       <destination>brugnaroto@gmail.com</destination>
       <destinationCc/>
       <destinationBCc/>
-      <replyto>brugnaroto@gmail.com</replyto>
+      <replyto>*</replyto>
       <replytoname>Pentaho</replytoname>
       <subject>Erro Processo de Carga</subject>
       <include_date>Y</include_date>
@@ -394,8 +394,8 @@
       <zip_name/>
       <use_auth>Y</use_auth>
       <use_secure_auth>Y</use_secure_auth>
-      <auth_user>brugnaroto@gmail.com</auth_user>
-      <auth_password>Encrypted 2be98afc827c68681be0afb2387c2fa83</auth_password>
+      <auth_user>*</auth_user>
+      <auth_password>Encrypted 2be98afc86aa7f2e4cb79ce10bef2cf90</auth_password>
       <only_comment>N</only_comment>
       <use_HTML>N</use_HTML>
       <use_Priority>N</use_Priority>
