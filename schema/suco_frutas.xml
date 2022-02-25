@@ -69,6 +69,14 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Fabrica" caption="F&#225;brica">
+    <Hierarchy name="Fabrica" visible="true" hasAll="true" allMemberName="Todas as Fabricas" allMemberCaption="Todas as F&#225;bricas" primaryKey="id_fabrica" caption="F&#225;brica" description="F&#225;brica">
+      <Table name="dim_fabrica" alias="">
+      </Table>
+      <Level name="Fabrica" visible="true" column="cod_fabrica" type="String" uniqueMembers="false" caption="F&#225;brica" description="F&#225;brica" captionColumn="desc_fabrica">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="dmpresidencia" visible="true" description="Data Mart da Presidencia" cache="true" enabled="true">
     <Table name="fato_presidencia">
     </Table>
@@ -79,6 +87,8 @@
     <DimensionUsage source="Cliente" name="Cliente" visible="true" foreignKey="id_cliente">
     </DimensionUsage>
     <DimensionUsage source="Organizacional" name="Organizacional" visible="true" foreignKey="id_vendedor">
+    </DimensionUsage>
+    <DimensionUsage source="Fabrica" name="Fabrica" caption="F&#225;brica" visible="true" foreignKey="id_fabrica">
     </DimensionUsage>
     <Measure name="Faturamento" column="faturamento" datatype="Numeric" formatString="#,###.00" aggregator="sum" caption="Faturamento" description="Faturamento em R$" visible="true">
     </Measure>
