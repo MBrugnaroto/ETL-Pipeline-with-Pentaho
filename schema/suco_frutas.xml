@@ -1,22 +1,48 @@
 <Schema name="SucoFrutas" description="Esquema dos Data Marts da Empresa Suco de Frutas">
-  <Dimension type="TimeDimension" visible="true" name="Tempo">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Tempo">
     <Hierarchy name="Calendario" visible="true" hasAll="true" allMemberName="Total Calendario" allMemberCaption="Total Calend&#225;rio" primaryKey="id_tempo" caption="Calend&#225;rio">
       <Table name="dim_tempo">
       </Table>
-      <Level name="Ano" visible="true" column="numero_ano" type="String" uniqueMembers="false" levelType="TimeYears">
+      <Level name="Ano" visible="true" column="numero_ano" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
-      <Level name="Semestre" visible="true" column="numero_semestre" nameColumn="nome_semestre" type="String" uniqueMembers="false" levelType="TimeHalfYears">
+      <Level name="Semestre" visible="true" column="numero_semestre" nameColumn="nome_semestre" type="String" uniqueMembers="false" levelType="TimeHalfYears" hideMemberIf="Never">
       </Level>
-      <Level name="Trimestre" visible="true" column="numero_trimestre" nameColumn="nome_trimestre" type="String" uniqueMembers="false" levelType="TimeQuarters">
+      <Level name="Trimestre" visible="true" column="numero_trimestre" nameColumn="nome_trimestre" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
       </Level>
-      <Level name="Mes" visible="true" column="numero_mes" nameColumn="nome_mes" type="String" uniqueMembers="false" levelType="TimeMonths" caption="M&#234;s">
+      <Level name="Mes" visible="true" column="numero_mes" nameColumn="nome_mes" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" caption="M&#234;s">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Produto">
+    <Hierarchy name="Produto" visible="true" hasAll="true" allMemberName="Todos os Produtos" primaryKey="id_produto">
+      <Table name="dim_produto" alias="">
+      </Table>
+      <Level name="Categoria" visible="true" column="cod_categoria" type="String" uniqueMembers="false" caption="Categoria" captionColumn="desc_categoria">
+      </Level>
+      <Level name="Marca" visible="true" column="cod_marca" type="String" uniqueMembers="false" caption="Marca" description="Marca" captionColumn="desc_marca">
+      </Level>
+      <Level name="Produto" visible="true" column="cod_produto" type="String" uniqueMembers="false" caption="Produto" description="Produto" captionColumn="desc_produto">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Tamanho" visible="true" hasAll="true" allMemberName="Todos os Tamanhos" primaryKey="id_produto">
+      <Table name="dim_produto" alias="">
+      </Table>
+      <Level name="Tamanho" visible="true" column="atr_tamanho" type="String" uniqueMembers="false" caption="Tamanho" description="Tamanho" captionColumn="atr_tamanho">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sabor" visible="true" hasAll="true" allMemberName="Todos os Sabores" primaryKey="id_produto">
+      <Table name="dim_produto" alias="">
+      </Table>
+      <Level name="Sabor" visible="true" column="atr_sabor" type="String" uniqueMembers="false" caption="Sabor" description="Sabor" captionColumn="atr_sabor">
       </Level>
     </Hierarchy>
   </Dimension>
   <Cube name="dmpresidencia" visible="true" description="Data Mart da Presidencia" cache="true" enabled="true">
     <Table name="fato_presidencia">
     </Table>
-    <DimensionUsage source="Tempo" name="Tempo" visible="true" foreignKey="id_tempo">
+    <DimensionUsage source="Tempo" name="Tempo" visible="true" foreignKey="id_tempo" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Produto" name="Produto" visible="true" foreignKey="id_produto">
     </DimensionUsage>
     <Measure name="Faturamento" column="faturamento" datatype="Numeric" formatString="#,###.00" aggregator="sum" caption="Faturamento" description="Faturamento em R$" visible="true">
     </Measure>
