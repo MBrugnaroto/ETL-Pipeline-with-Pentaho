@@ -37,12 +37,34 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Cliente">
+    <Hierarchy name="Cliente" visible="true" hasAll="true" allMemberName="Todos os Clientes" primaryKey="id_cliente">
+      <Table name="dim_cliente" alias="">
+      </Table>
+      <Level name="Regiao" visible="true" column="cod_regiao" type="String" uniqueMembers="false" caption="Regi&#227;o" description="Regiao" captionColumn="desc_regiao">
+      </Level>
+      <Level name="Estado" visible="true" column="cod_estado" type="String" uniqueMembers="false" caption="Estado" description="Estado" captionColumn="desc_estado">
+      </Level>
+      <Level name="Cidade" visible="true" column="cod_cidade" type="String" uniqueMembers="false" caption="Cidade" description="Cidade" captionColumn="desc_cidade">
+      </Level>
+      <Level name="Cliente" visible="true" column="cod_cliente" type="String" uniqueMembers="false" caption="Cliente" description="Cliente" captionColumn="desc_cliente">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Segmento" visible="true" hasAll="true" allMemberName="Todas as Segmento" primaryKey="id_cliente">
+      <Table name="dim_cliente" alias="">
+      </Table>
+      <Level name="Segmento" visible="true" column="cod_segmento" type="String" uniqueMembers="false" caption="Segmento" description="Segmento" captionColumn="desc_segmento">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="dmpresidencia" visible="true" description="Data Mart da Presidencia" cache="true" enabled="true">
     <Table name="fato_presidencia">
     </Table>
     <DimensionUsage source="Tempo" name="Tempo" visible="true" foreignKey="id_tempo" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Produto" name="Produto" visible="true" foreignKey="id_produto">
+    </DimensionUsage>
+    <DimensionUsage source="Cliente" name="Cliente" visible="true" foreignKey="id_cliente">
     </DimensionUsage>
     <Measure name="Faturamento" column="faturamento" datatype="Numeric" formatString="#,###.00" aggregator="sum" caption="Faturamento" description="Faturamento em R$" visible="true">
     </Measure>
