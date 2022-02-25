@@ -788,7 +788,7 @@ INNER JOIN (
 	  AND A.Cod_Fabrica = B.Cod_Fabrica AND A.Cod_Tempo = B.Cod_Tempo ) K
 ON X.Cod_Produto = K.Cod_Produto
 	  AND X.Cod_Fabrica = K.Cod_Fabrica AND X.Cod_Tempo = K.Cod_Tempo
-	  WHERE CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) >= ${ANO_INICIAL} 
+	  WHERE CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) >= ${ANO_INCIAL} 
 	  AND CAST(SUBSTRING(X.Cod_tempo,5,2) AS UNSIGNED) >= ${MES_INICIAL}
 	  AND CAST(SUBSTRING(X.Cod_tempo,1,4) AS UNSIGNED) &lt;= ${ANO_FINAL} 
 	  AND CAST(SUBSTRING(X.Cod_tempo,5,2) AS UNSIGNED) &lt;= ${MES_FINAL}</sql>

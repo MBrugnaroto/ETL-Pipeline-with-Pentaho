@@ -98,5 +98,17 @@
     </Measure>
     <Measure name="Unidade Vendida" column="unidade_vendida" datatype="Numeric" formatString="#,###.00" aggregator="sum" caption="Unidade Vendida" description="Unidade Vendida" visible="true">
     </Measure>
+    <CalculatedMember name="Faturamento Liquido" caption="Faturamento L&#237;quido" formula="[Measures].[Faturamento]-[Measures].[Custo de Frete]-[Measures].[Imposto]" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="Margem" caption="Margem" formula="[Measures].[Faturamento Liquido]-[Measures].[Custo Fixo]-[Measures].[Custo Variavel]" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="Preco Medio" formatString="" caption="Pre&#231;o M&#233;dio" formula="[Measures].[Faturamento]/[Measures].[Quantidade Vendida]" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="Variacao da Meta de Faturamento" formatString="" caption="Varia&#231;&#227;o da Meta de Faturamento" formula="(([Measures].[Faturamento Liquido]/[Measures].[Meta Faturamento])-1)*100" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="Variacao da Meta do Custo" formatString="" caption="Varia&#231;&#227;o da Meta do Custo" formula="((([Measures].[Custo Fixo]+[Measures].[Custo Variavel])/[Measures].[Meta Custo])-1)*100" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="Variacao da Meta da Margem" formatString="" caption="Varia&#231;&#227;o da Meta da Margem" formula="((([Measures].[Margem])/([Measures].[Meta Faturamento]-[Measures].[Meta Custo]))-1)*100" dimension="Measures" visible="true">
+    </CalculatedMember>
   </Cube>
 </Schema>
