@@ -57,6 +57,18 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Organizacional">
+    <Hierarchy name="Organizacional" visible="true" hasAll="true" allMemberName="Todos da Organizacao" allMemberCaption="Todos da Organiza&#231;&#227;o" primaryKey="id_vendedor" description="Organizacional">
+      <Table name="dim_organizacional" alias="">
+      </Table>
+      <Level name="Diretor" visible="true" column="cod_diretor" type="String" uniqueMembers="false" caption="Diretor" description="Diretor" captionColumn="desc_diretor">
+      </Level>
+      <Level name="Gerente" visible="true" column="cod_gerente" type="String" uniqueMembers="false" caption="Gerente" description="Gerente" captionColumn="desc_gerente">
+      </Level>
+      <Level name="Vendedor" visible="true" column="cod_vendedor" uniqueMembers="false" caption="Vendedor" description="Vendedor" captionColumn="desc_vendedor">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="dmpresidencia" visible="true" description="Data Mart da Presidencia" cache="true" enabled="true">
     <Table name="fato_presidencia">
     </Table>
@@ -65,6 +77,8 @@
     <DimensionUsage source="Produto" name="Produto" visible="true" foreignKey="id_produto">
     </DimensionUsage>
     <DimensionUsage source="Cliente" name="Cliente" visible="true" foreignKey="id_cliente">
+    </DimensionUsage>
+    <DimensionUsage source="Organizacional" name="Organizacional" visible="true" foreignKey="id_vendedor">
     </DimensionUsage>
     <Measure name="Faturamento" column="faturamento" datatype="Numeric" formatString="#,###.00" aggregator="sum" caption="Faturamento" description="Faturamento em R$" visible="true">
     </Measure>
