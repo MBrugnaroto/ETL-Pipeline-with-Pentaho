@@ -1,0 +1,5 @@
+Select  Non Empty
+Except ([Cliente].[Estado].Members,
+[Cliente].[Sudeste].[MG])  On Rows  ,  
+Non Empty  { [Measures].[Faturamento]}  On Columns
+FROM [dmpresidencia]

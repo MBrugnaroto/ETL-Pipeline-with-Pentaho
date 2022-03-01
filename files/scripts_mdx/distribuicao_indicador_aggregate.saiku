@@ -1,0 +1,11 @@
+WITH
+MEMBER [Tempo.Calendario].[BIMESTRE 1] AS
+'Aggregate ( {[Tempo.Calendario].[2013].[Primeiro Semestre].[Primeiro Trimestre].[Janeiro]
+, [Tempo.Calendario].[2013].[Primeiro Semestre].[Primeiro Trimestre].[Fevereiro] }) '
+MEMBER [Tempo.Calendario].[BIMESTRE 2] AS
+'Aggregate ( {[Tempo.Calendario].[2013].[Primeiro Semestre].[Primeiro Trimestre].[Março],
+ [Tempo.Calendario].[2013].[Primeiro Semestre].[Segundo Trimestre].[Abril]} ) '
+Select  Non Empty
+{[Tempo.Calendario].[BIMESTRE 1], [Tempo.Calendario].[BIMESTRE 2]}  On Rows  ,  
+Non Empty  { [Measures].[Faturamento]}  On Columns
+FROM [dmpresidencia]
