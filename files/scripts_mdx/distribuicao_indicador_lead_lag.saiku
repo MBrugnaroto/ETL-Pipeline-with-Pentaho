@@ -1,0 +1,11 @@
+SELECT 
+{[Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro],
+ [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro].lead(2)} ON ROWS,
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
+
+SELECT 
+{[Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro],
+ [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro].lag(2)} ON ROWS,
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
