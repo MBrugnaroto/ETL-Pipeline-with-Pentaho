@@ -1,0 +1,9 @@
+SELECT 
+ Head(LastPeriods (3, [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro]), 1) On Rows,  
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
+
+SELECT 
+ Tail(LastPeriods (3, [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro]), 1) On Rows,  
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
