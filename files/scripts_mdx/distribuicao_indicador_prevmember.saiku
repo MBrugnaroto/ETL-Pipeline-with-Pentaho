@@ -1,4 +1,5 @@
-WITH MEMBER [Measures].[Variação de Faturamento] AS
+WITH 
+MEMBER [Measures].[Variação de Faturamento] AS
 '([Measures].[Faturamento]/([Measures].Faturamento, [Tempo.Calendario].CurrentMember.PrevMember))-1', FORMAT_STRING = "#,###.00 %"
 SELECT
 NON EMPTY {[Measures].[Faturamento], 
