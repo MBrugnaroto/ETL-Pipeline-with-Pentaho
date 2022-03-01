@@ -1,0 +1,4 @@
+SELECT 
+ [Measures].[Faturamento] ON ROWS,
+ Ascendants([Tempo.Calendario].[2014].[Segundo Semestre]) ON COLUMNS
+FROM [dmpresidencia]
