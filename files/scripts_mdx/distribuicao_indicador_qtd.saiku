@@ -1,0 +1,8 @@
+WITH 
+MEMBER [Measures].[Faturamento YTD] AS
+'Sum(Qtd([Tempo.Calendario].CurrentMember), [Measures].[Faturamento])', FORMAT_STRING = "#,###.00"
+SELECT
+NON EMPTY {[Measures].[Faturamento],
+           [Measures].[Faturamento YTD]} ON COLUMNS,
+NON EMPTY EXISTS({[Tempo.Calendario].[Mes].Members}, [Tempo.Calendario].[2014]) ON ROWS
+FROM [dmpresidencia] 
