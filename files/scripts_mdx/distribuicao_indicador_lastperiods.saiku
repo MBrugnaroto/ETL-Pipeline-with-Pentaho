@@ -1,0 +1,4 @@
+SELECT 
+LastPeriods(4, [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro]) ON ROWS,
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
