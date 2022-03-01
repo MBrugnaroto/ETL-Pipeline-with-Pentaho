@@ -2,3 +2,13 @@ SELECT
  [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro].siblings ON ROWS,
  [Measures].[Faturamento] ON COLUMNS
 FROM [dmpresidencia]
+
+SELECT 
+ [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro].LastSibling ON ROWS,
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
+
+SELECT 
+ [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro].FirstSibling ON ROWS,
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
