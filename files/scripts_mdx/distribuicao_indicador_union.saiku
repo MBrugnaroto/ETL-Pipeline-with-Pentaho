@@ -1,0 +1,4 @@
+Select  Non Empty
+Union ([Cliente].[Estado].Members, [Cliente].[Regiao].Members)  On Rows  ,  
+Non Empty  { [Measures].[Faturamento]}  On Columns
+FROM [dmpresidencia]
