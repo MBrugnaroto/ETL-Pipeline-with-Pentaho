@@ -1,0 +1,4 @@
+SELECT 
+ [Tempo.Calendario].[2014].[Segundo Semestre].[Terceiro Trimestre].[Setembro].siblings ON ROWS,
+ [Measures].[Faturamento] ON COLUMNS
+FROM [dmpresidencia]
