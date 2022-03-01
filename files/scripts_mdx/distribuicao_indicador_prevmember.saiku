@@ -1,0 +1,7 @@
+WITH MEMBER [Measures].[Variação de Faturamento] AS
+'([Measures].[Faturamento]/([Measures].Faturamento, [Tempo.Calendario].CurrentMember.PrevMember))-1', FORMAT_STRING = "#,###.00 %"
+SELECT
+NON EMPTY {[Measures].[Faturamento], 
+           [Measures].[Variação de Faturamento]} ON COLUMNS,
+EXISTS([Tempo.Calendario].[Mes].Members, [Tempo.Calendario].[2013]) ON ROWS
+FROM [dmpresidencia]

@@ -1,0 +1,7 @@
+WITH MEMBER [Measures].[% TAXA] AS
+'[Measures].[Faturamento]/([Measures].Faturamento, [Tempo.Calendario].CurrentMember.Parent.Parent)', FORMAT_STRING = "#,###.00 %"
+SELECT
+NON EMPTY {[Measures].[Faturamento], 
+           [Measures].[% TAXA]} ON COLUMNS,
+NON EMPTY {[Tempo.Calendario].[Trimestre].Members} ON ROWS
+FROM [dmpresidencia]
