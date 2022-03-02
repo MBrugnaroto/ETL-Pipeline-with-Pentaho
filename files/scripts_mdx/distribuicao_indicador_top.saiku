@@ -1,0 +1,14 @@
+SELECT
+ ORDER(TopCount([Cliente].[Cidade].Members, 4, [Measures].[Faturamento]), [Measures].[Faturamento], BDESC) on rows,
+ [Measures].[Faturamento] on columns
+FROM [dmpresidencia]
+
+SELECT
+ ORDER(TopSum([Cliente].[Cidade].Members, 98000000, [Measures].[Faturamento]), [Measures].[Faturamento], BDESC) on rows,
+ [Measures].[Faturamento] on columns
+FROM [dmpresidencia]
+
+SELECT
+ ORDER(TopPercent([Cliente].[Cidade].Members, 60, [Measures].[Faturamento]), [Measures].[Faturamento], BDESC) on rows,
+ [Measures].[Faturamento] on columns
+FROM [dmpresidencia]
