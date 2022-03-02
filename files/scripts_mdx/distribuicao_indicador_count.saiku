@@ -2,7 +2,9 @@ WITH SET [CIDADES] AS
     'ORDER([Cliente].[Cidade].Members, [Measures].[Faturamento], BDESC)'
 MEMBER [Measures].[RANK] AS
     'RANK([Cliente].[Cidades].CurrentMember, [CIDADES])', FORMAT_STRING = "#;#;-"
+MEMBER [Measures].[COUNT] AS
+    '[Cliente].[Cidade].Members.Count'
 SELECT 
  NON EMPTY [CIDADES] on rows,
- NON EMPTY {[Measures].[Faturamento], [Measures].[RANK]} on columns
+ NON EMPTY {[Measures].[Faturamento], [Measures].[RANK], [Measures].[COUNT]} on columns
 FROM [dmpresidencia]
