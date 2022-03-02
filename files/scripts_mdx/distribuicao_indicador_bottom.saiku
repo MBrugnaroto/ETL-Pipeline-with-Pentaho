@@ -1,0 +1,14 @@
+SELECT
+ NON EMPTY ORDER(BottomCount([Cliente].[Cidade].Members, 5, [Measures].[Faturamento]), [Measures].[Faturamento], BDESC) on rows,
+ NON EMPTY [Measures].[Faturamento] on columns
+FROM [dmpresidencia]
+
+SELECT
+ ORDER(BottomSum([Cliente].[Cidade].Members, 2000000, [Measures].[Faturamento]), [Measures].[Faturamento], BDESC) on rows,
+ [Measures].[Faturamento] on columns
+FROM [dmpresidencia]
+
+SELECT
+ ORDER(BottomPercent([Cliente].[Cidade].Members, 10, [Measures].[Faturamento]), [Measures].[Faturamento], BDESC) on rows,
+ [Measures].[Faturamento] on columns
+FROM [dmpresidencia]
